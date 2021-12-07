@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { CardList } from './components/card-list/card-list.component';
 
 class App extends Component {
   constructor() {
@@ -13,16 +14,30 @@ class App extends Component {
       //   {name: 'Dracula',       id: 'asc2'},
       //   {name: 'Zombie',        id: 'asc3'}
       // ] 
-      monsters:[]
+      monsters:[],
+      searchField: ''
     }
   }
   render() {
+    //Destructing to make the "state" local
+    const {monsters, searchField} = this.state;
+    //Equivalent to the following two separate assignments
+    //const monsters = this.state.monsters;
+    //const searchField = this.state.searchField;
+    const filteredMonsters = monsters.filter(monster => 
+      monster.name.toLowerCase().includes(searchField.toLowerCase()))
     return (
       <div className="App">
-       {
-         this.state.monsters.map(monster => (
-           <h1 key={monster.id}>{monster.name}</h1>)
-         )}
+        <br/>
+        <label>Filter&nbsp;</label>
+        <input type="search" placeholder="search monsters" 
+               onChange={e => 
+                  this.setState({searchField: e.target.value})
+                }
+        />
+        <br/><br/>
+        <div><CardList monsters={filteredMonsters}/></div>
+        
       </div>
     );
   }
