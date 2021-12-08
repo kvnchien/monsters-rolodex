@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { CardList } from './components/card-list/card-list.component';
+import { SearchBox } from './components/search-box/search-box.component.jsx';
 
 class App extends Component {
   constructor() {
@@ -16,7 +17,10 @@ class App extends Component {
       // ] 
       monsters:[],
       searchField: ''
-    }
+    };
+
+    //Binding the 'handleChange' method to the 'this' context 
+    //this.handleChange = this.handleChange.bind(this); <-- We don't need this with the arrow function construct for the handleChange method
   }
   render() {
     //Destructing to make the "state" local
@@ -30,17 +34,29 @@ class App extends Component {
       <div className="App">
         <br/>
         <label>Filter&nbsp;</label>
-        <input type="search" placeholder="search monsters" 
-               onChange={e => 
-                  this.setState({searchField: e.target.value})
-                }
-        />
-        <br/><br/>
+       {/* 
+         This will work without binding the handleChange method in the constructor 
+        <SearchBox placeholder='search monsters' handleChange={e=>this.handleChange(e)}/>
+       */}
+       <SearchBox placeholder='search monsters' handleChange={this.handleChange}/>
+        <br/>
         <div><CardList monsters={filteredMonsters}/></div>
         
       </div>
     );
   }
+
+  //With this arrow function construct inside the class, the binding of this is done automatically
+  //by the javascript when the component is created.. The handleChange(e) {} + the binding inside the
+  //constructor is no longer needed
+  handleChange = (e) => {
+    this.setState({searchField: e.target.value});
+  }
+  /*
+  handleChange(e) {
+    this.setState({searchField: e.target.value});
+  }
+  */
 
   //Lifecycle method
   async componentDidMount() {
