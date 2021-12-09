@@ -19,11 +19,28 @@ class App extends Component {
       searchField: ''
     };
 
-    //Binding the 'handleChange' method to the 'this' context 
-    //this.handleChange = this.handleChange.bind(this); <-- We don't need this with the arrow function construct for the handleChange method
+    //TEST
+    //this.handleClick1 = this.handleClick1.bind(this);
+    //this.handleClick2 = this.handleClick1.bind(this);
+
+    //Bind 'this' context to the 'handleChange' method in the constructor
+    //But we don't need to do this if we use the arrow function construct 
+    //as shown in the method implementation down below
+    //this.handleChange = this.handleChange.bind(this); 
   }
+
+  /*
+  //TEST
+  handleClick1() {
+    console.log("button 1 clicked");
+    //console.log(this);
+  }
+  //TEST
+  handleClick3 = () => console.log("button 3 clicked");
+  */
+
   render() {
-    //Destructing to make the "state" local
+    //Destructing to make the "state" a local variable
     const {monsters, searchField} = this.state;
     //Equivalent to the following two separate assignments
     //const monsters = this.state.monsters;
@@ -32,6 +49,13 @@ class App extends Component {
       monster.name.toLowerCase().includes(searchField.toLowerCase()))
     return (
       <div className="App">
+        {/* TEST */}
+        {/* The 'this.handClick1()' function is here so it's executed immediately
+        <button onClick={this.handleClick1()}>click 1</button>
+        <button onClick={this.handleClick1}>click 2</button>
+        <button onClick={this.handleClick2}>click 3</button>
+        <button onClick={this.handleClick3}>click 4</button>
+        */}
         <br/>
         <label>Filter&nbsp;</label>
        {/* 
