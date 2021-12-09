@@ -56,8 +56,7 @@ class App extends Component {
         <button onClick={this.handleClick2}>click 3</button>
         <button onClick={this.handleClick3}>click 4</button>
         */}
-        <br/>
-        <label>Filter&nbsp;</label>
+       <h1> Monsters Rolodex </h1>
        {/* 
          This will work without binding the handleChange method in the constructor 
         <SearchBox placeholder='search monsters' handleChange={e=>this.handleChange(e)}/>
