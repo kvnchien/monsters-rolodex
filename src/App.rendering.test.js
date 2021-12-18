@@ -16,7 +16,8 @@ class App extends Component {
       //   {name: 'Zombie',        id: 'asc3'}
       // ] 
       monsters:[],
-      searchField: ''
+      searchField: '',
+      title: ''
     };
 
     //TEST
@@ -41,12 +42,12 @@ class App extends Component {
 
   render() {
     //Destructing to make the "state" a local variable
-    const {monsters, searchField} = this.state;
+    const {monsters, searchField, title } = this.state;
     //Equivalent to the following two separate assignments
     //const monsters = this.state.monsters;
     //const searchField = this.state.searchField;
-    const filteredMonsters = monsters.filter(monster => 
-      monster.name.toLowerCase().includes(searchField.toLowerCase()))
+    // const filteredMonsters = monsters.filter(monster => 
+    //   monster.name.toLowerCase().includes(searchField.toLowerCase()))
       
     return (
       <div className="App">
@@ -57,14 +58,14 @@ class App extends Component {
         <button onClick={this.handleClick2}>click 3</button>
         <button onClick={this.handleClick3}>click 4</button>
         */}
-       <h1> Monsters Rolodex </h1>
+       <h1> { title } </h1>
        {/* 
          This will work without binding the handleChange method in the constructor 
         <SearchBox placeholder='search monsters' handleChange={e=>this.handleChange(e)}/>
        */}
        <SearchBox placeholder='search monsters' handleChange={this.handleChange}/>
         <br/>
-        <div><CardList monsters={filteredMonsters}/></div>
+        <div><CardList monsters={monsters}/></div>
         
       </div>
     );
@@ -75,7 +76,9 @@ class App extends Component {
   //constructor is no longer needed
   handleChange = (event) => {
     this.setState({
-      searchField: event.target.value });
+      searchField: event.target.value,
+      title: event.target.value
+    });
   }
   /*
   handleChange(e) {
@@ -96,60 +99,9 @@ class App extends Component {
     const users = await stuff.json();
     console.log(users);
     this.setState({monsters: users});
+   
+
   }
 }
-
-/*
-class App extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      string: 'Hello Kaylee'
-    }
-  }
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          
-          <p>{this.state.string}</p>
-          <button onClick={() => this.setState({string: 'Hello Kevin'})}>Change Text</button>
-        
-        </header>
-      </div>
-    );
-  }
-}
-*/
-
-
-/*
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-*/
 
 export default App;
